@@ -1,6 +1,29 @@
-import User from "../models/User.js";
+import Task from "../models/Task.js";
 
+export const getAllTasks = async (req, res) => {
+  try {
+    const tasks = await Task.find().sort({ createdAt: -1 }); //show newest first
+    res.status(200).json(notes);
+  } catch (error) {
+    console.error("Error in getAllNotes controller", error);
+    res.status(500).json({ message: "Internal Server Error" });
+  }
+};
 
+export const createTask = async (req, res) => {
+  try {
+    const { title, notes } = req.body;
+    const task = new Task({ title, notes });
+
+    const savedTask = await task.save();
+    res.status(201).json(savedTask);
+  } catch (error) {
+    console.error("Error in createTask controller", error);
+    res.status(500).json({ message: "Internal Server Error" });
+  }
+};
+
+// export const getAllNotes = async (req, res) => {
 //   try {
 //     const notes = await Note.find().sort({ createdAt: -1 }); //show newest first
 //     res.status(200).json(notes);

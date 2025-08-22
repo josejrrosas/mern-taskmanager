@@ -1,10 +1,9 @@
 import express from "express";
-// import { getAllNotes } from "../controllers/notesController.js";
+import { getAllTasks, createTask } from "../controllers/tasksController.js";
 const router = express.Router();
 
-router.get('/health',(req,res) => {
-    res.status(200).json({ok: true});
-});
+router.get("/", getAllTasks);
+router.post("/", createTask);
   
 
 export default router;
